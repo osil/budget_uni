@@ -4,12 +4,6 @@ include "./authen/check_authen.php";
 include "./config/global.php";
 include "./config/database.php";
 
-$code = 10;
-if ($code == 0) {
-    echo "Please Set code variable.";
-    exit();
-}
-
 
 ?>
 <!doctype html>
@@ -62,7 +56,7 @@ if ($code == 0) {
                                                     <span class="icon">
                                                         <i class="icon-server"></i>
                                                     </span>
-                                                    <h6>ชื่อผู้ใช้งาน - <span><?php echo $_SESSION["sess-pjr-staffname"];?></span></h6>
+                                                    <h6>ชื่อผู้ใช้งาน - <span><?php echo $_SESSION["sess-bgu-user_code"]; ?></span></h6>
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
@@ -70,17 +64,18 @@ if ($code == 0) {
                                                     <span class="icon">
                                                         <i class="icon-map-pin"></i>
                                                     </span>
-                                                    <h6>สังกัด - <span><?php echo $_SESSION["sess-pjr-departmentname"];?></span></h6>
+                                                    <h6>สังกัด - <span><?php echo $_SESSION["sess-bgu-user_name"]; ?></span></h6>
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                                                 <div class="profile-tile">
                                                     <span class="icon">
-                                                        <i class="icon-phone1"></i>
+                                                        <i class="icon-schedule"></i>
                                                     </span>
-                                                    <h6>โทรศัพท์ - <span></span></h6>
+                                                    <h6>ปีงบประมาณ - <span><?php echo $_SESSION["sess-bgu-periodid"]; ?></span></h6>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                     <div class="profile-avatar-tile">
@@ -102,7 +97,7 @@ if ($code == 0) {
                                 </div>
                                 <div class="sale-details">
                                     <h2>25</h2>
-                                    <p>Products</p>
+                                    <p><?php echo $file_name ?></p>
                                 </div>
                                 <div class="sale-graph">
                                     <div id="sparklineLine1"></div>
