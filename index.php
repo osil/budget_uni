@@ -62,7 +62,7 @@ include "./config/database.php";
                                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
                                                 <div class="profile-tile">
                                                     <span class="icon">
-                                                        <i class="icon-map-pin"></i>
+                                                        <i class="icon-dollar-sign"></i>
                                                     </span>
                                                     <h6>สังกัด - <span><?php echo $_SESSION["sess-bgu-user_name"]; ?></span></h6>
                                                 </div>

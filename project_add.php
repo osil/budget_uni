@@ -4,6 +4,7 @@ include "./authen/check_authen.php";
 include "./config/global.php";
 include "./config/database.php";
 
+$periodid = $_SESSION['sess-bgu-periodid'];
 
 ?>
 <!doctype html>
@@ -134,128 +135,290 @@ include "./config/database.php";
                                                 <!-- Field wrapper end -->
 
                                             </div>
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-12">
-                                                <div class="form-section-header">Billing <span class="title-info">We'll never share your with anyone.</span></div>
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+
+                                                <!-- Field wrapper start -->
+                                                <div class="field-wrapper">
+                                                    <select class="select-single js-states form-select required" data-live-search="true" id="strategyuid" name="strategyuid" required>
+                                                        <option value="">เลือกประเภทยุทธศาสตร์</option>
+                                                        <?php
+
+                                                        $sql = "SELECT * FROM strategyu";
+
+                                                        $params = array();
+                                                        $result = $con->prepare($sql);
+                                                        $res = $result->execute($params);
+                                                        $row = $result->rowCount();
+                                                        while ($data = $result->fetch()) {
+                                                        ?>
+                                                            <option value="<?php echo $data['STRATEGYUID'] ?>"><?php echo $data['STRATEGYUNAME']  ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                    <div class="field-placeholder">เลือกประเภทยุทธศาสตร์</div>
+                                                    <div class="invalid-feedback">
+                                                        * กรุณาเลือก
+                                                    </div>
+                                                </div>
+                                                <!-- Field wrapper end -->
+
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
+                                                    <select class="select-single js-states form-select required" data-live-search="true" id="budgettype_id" name="budgettype_id" onchange="_getBudgetSubType(this.value)" required>
+                                                        <option value="">เลือกประเภทงบ</option>
+                                                        <?php
+
+                                                        $sql = "SELECT * FROM budgettype";
+
+                                                        $params = array();
+                                                        $result = $con->prepare($sql);
+                                                        $res = $result->execute($params);
+                                                        $row = $result->rowCount();
+                                                        while ($data = $result->fetch()) {
+                                                        ?>
+                                                            <option value="<?php echo $data['budgettype_id'] ?>"><?php echo $data['budgettype_name']  ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                    <div class="field-placeholder">เลือกประเภทงบ</div>
+                                                    <div class="invalid-feedback">
+                                                        * กรุณาเลือก
+                                                    </div>
+                                                </div>
+                                                <!-- Field wrapper end -->
+
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+
+                                                <!-- Field wrapper start -->
+                                                <div class="field-wrapper">
+
+                                                    <select class="select-single js-states required" data-live-search="true" id="budgettype_sub_id" name="budgettype_sub_id" required>
+                                                        <option value="">เลือกรายละเอียดงบ</option>
+
+
+                                                    </select>
+                                                    <div class="field-placeholder">เลือกรายละเอียดงบ</div>
+                                                    <div class="invalid-feedback">
+                                                        * กรุณาเลือก
+                                                    </div>
+
+
+                                                </div>
+                                                <!-- Field wrapper end -->
+
+                                            </div>
+
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-12">
+                                                <div class="form-section-header">รายละเอียดการ <span class="title-info">We'll never share your with anyone.</span></div>
+                                            </div>
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                                                <!-- Field wrapper start -->
+                                                <div class="field-wrapper">
                                                     <div class="input-group">
-                                                        <input class="form-control" type="text">
+                                                        <input class="form-control" type="text" id="projectname" name="projectname" required>
                                                         <span class="input-group-text">
                                                             <i class="icon-info2"></i>
                                                         </span>
                                                     </div>
-                                                    <div class="field-placeholder">Plan</div>
+                                                    <div class="field-placeholder">ชื่อโครงการ</div>
                                                 </div>
                                                 <!-- Field wrapper end -->
 
                                             </div>
-                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 
-                                                <!-- Field wrapper start -->
-                                                <div class="field-wrapper">
-                                                    <div class="checkbox-container">
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="billingInterval" id="monthly" value="monthly">
-                                                            <label class="form-check-label" for="monthly">Monthly</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="billingInterval" id="quarterly" value="quarterly">
-                                                            <label class="form-check-label" for="quarterly">Quatrerly</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="billingInterval" id="yearly" value="yearly" disabled>
-                                                            <label class="form-check-label" for="yearly">Yearly</label>
-                                                        </div>
-                                                        <div class="field-placeholder">Billing Interval</div>
-                                                    </div>
-                                                </div>
-                                                <!-- Field wrapper end -->
 
-                                            </div>
+
                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-12">
-                                                <div class="form-section-header">Business Address</div>
+                                                <div class="form-section-header">รายละเอียดการใช้เงินแต่ละเดือน ประจำปีงบประมาณ <?php echo $periodid; ?></div>
                                             </div>
-                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
 
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
                                                     <div class="input-group">
-                                                        <input class="form-control" type="text">
+                                                        <input class="form-control" type="number" min="0" id="m1" name="m1" required>
                                                         <span class="input-group-text">
-                                                            <i class="icon-map-pin"></i>
+                                                            <i class="icon-dollar-sign"></i>
                                                         </span>
                                                     </div>
-                                                    <div class="field-placeholder">Street Address</div>
+                                                    <div class="field-placeholder">ต.ค.<?php echo (substr($periodid, 2) - 1); ?></div>
                                                 </div>
                                                 <!-- Field wrapper end -->
 
                                             </div>
-                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
 
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
                                                     <div class="input-group">
-                                                        <input class="form-control" type="text">
+                                                        <input class="form-control" type="number" min="0" id="m2" name="m2" required>
                                                         <span class="input-group-text">
-                                                            <i class="icon-map"></i>
+                                                            <i class="icon-dollar-sign"></i>
                                                         </span>
                                                     </div>
-                                                    <div class="field-placeholder">City</div>
+                                                    <div class="field-placeholder">พ.ย.<?php echo (substr($periodid, 2) - 1); ?></div>
                                                 </div>
                                                 <!-- Field wrapper end -->
 
                                             </div>
-                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
 
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
                                                     <div class="input-group">
-                                                        <input class="form-control" type="text">
+                                                        <input class="form-control" type="number" min="0" id="m3" name="m3" required>
                                                         <span class="input-group-text">
-                                                            <i class="icon-edit-2"></i>
+                                                            <i class="icon-dollar-sign"></i>
                                                         </span>
                                                     </div>
-                                                    <div class="field-placeholder">Postal Code</div>
+                                                    <div class="field-placeholder">ธ.ค.<?php echo (substr($periodid, 2) - 1); ?></div>
                                                 </div>
                                                 <!-- Field wrapper end -->
 
                                             </div>
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
 
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
-                                                    <textarea class="form-control" rows="2"></textarea>
-                                                    <div class="field-placeholder">Message <span class="text-danger">*</span></div>
-                                                </div>
-                                                <!-- Field wrapper end -->
-
-                                            </div>
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-
-                                                <!-- Field wrapper start -->
-                                                <div class="field-wrapper">
-                                                    <div class="checkbox-container">
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" id="chcekEmail" value="option1">
-                                                            <label class="form-check-label" for="chcekEmail">Email</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" id="checkSms" value="option2">
-                                                            <label class="form-check-label" for="checkSms">SMS</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" id="checkPhone" value="option3">
-                                                            <label class="form-check-label" for="checkPhone">Phone</label>
-                                                        </div>
-                                                        <div class="field-placeholder">Communication</div>
+                                                    <div class="input-group">
+                                                        <input class="form-control" type="number" min="0" id="m4" name="m4" required>
+                                                        <span class="input-group-text">
+                                                            <i class="icon-dollar-sign"></i>
+                                                        </span>
                                                     </div>
+                                                    <div class="field-placeholder">ม.ค.<?php echo substr($periodid, 2); ?></div>
                                                 </div>
                                                 <!-- Field wrapper end -->
 
                                             </div>
+
+                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+
+                                                <!-- Field wrapper start -->
+                                                <div class="field-wrapper">
+                                                    <div class="input-group">
+                                                        <input class="form-control" type="number" min="0" id="m5" name="m5" required>
+                                                        <span class="input-group-text">
+                                                            <i class="icon-dollar-sign"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="field-placeholder">ก.พ.<?php echo substr($periodid, 2); ?></div>
+                                                </div>
+                                                <!-- Field wrapper end -->
+
+                                            </div>
+                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+
+                                                <!-- Field wrapper start -->
+                                                <div class="field-wrapper">
+                                                    <div class="input-group">
+                                                        <input class="form-control" type="number" min="0" id="m6" name="m6" required>
+                                                        <span class="input-group-text">
+                                                            <i class="icon-dollar-sign"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="field-placeholder">มี.ค.<?php echo substr($periodid, 2); ?></div>
+                                                </div>
+                                                <!-- Field wrapper end -->
+
+                                            </div>
+                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+
+                                                <!-- Field wrapper start -->
+                                                <div class="field-wrapper">
+                                                    <div class="input-group">
+                                                        <input class="form-control" type="number" min="0" id="m7" name="m7" required>
+                                                        <span class="input-group-text">
+                                                            <i class="icon-dollar-sign"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="field-placeholder">เม.ย.<?php echo substr($periodid, 2); ?></div>
+                                                </div>
+                                                <!-- Field wrapper end -->
+
+                                            </div>
+                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+
+                                                <!-- Field wrapper start -->
+                                                <div class="field-wrapper">
+                                                    <div class="input-group">
+                                                        <input class="form-control" type="number" min="0" id="m8" name="m8" required>
+                                                        <span class="input-group-text">
+                                                            <i class="icon-dollar-sign"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="field-placeholder">พ.ค.<?php echo substr($periodid, 2); ?></div>
+                                                </div>
+                                                <!-- Field wrapper end -->
+
+                                            </div>
+                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+
+                                                <!-- Field wrapper start -->
+                                                <div class="field-wrapper">
+                                                    <div class="input-group">
+                                                        <input class="form-control" type="number" min="0" id="m9" name="m9" required>
+                                                        <span class="input-group-text">
+                                                            <i class="icon-dollar-sign"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="field-placeholder">มิ.ย.<?php echo substr($periodid, 2); ?></div>
+                                                </div>
+                                                <!-- Field wrapper end -->
+
+                                            </div>
+                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+
+                                                <!-- Field wrapper start -->
+                                                <div class="field-wrapper">
+                                                    <div class="input-group">
+                                                        <input class="form-control" type="number" min="0" id="m10" name="m10" required>
+                                                        <span class="input-group-text">
+                                                            <i class="icon-dollar-sign"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="field-placeholder">ก.ค.<?php echo substr($periodid, 2); ?></div>
+                                                </div>
+                                                <!-- Field wrapper end -->
+
+                                            </div>
+                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+
+                                                <!-- Field wrapper start -->
+                                                <div class="field-wrapper">
+                                                    <div class="input-group">
+                                                        <input class="form-control" type="number" min="0" id="m11" name="m11" required>
+                                                        <span class="input-group-text">
+                                                            <i class="icon-dollar-sign"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="field-placeholder">ส.ค.<?php echo substr($periodid, 2); ?></div>
+                                                </div>
+                                                <!-- Field wrapper end -->
+
+                                            </div>
+                                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+
+                                                <!-- Field wrapper start -->
+                                                <div class="field-wrapper">
+                                                    <div class="input-group">
+                                                        <input class="form-control" type="number" min="0" id="m12" name="m12" required>
+                                                        <span class="input-group-text">
+                                                            <i class="icon-dollar-sign"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="field-placeholder">ก.ย.<?php echo substr($periodid, 2); ?></div>
+                                                </div>
+                                                <!-- Field wrapper end -->
+
+                                            </div>
+
+
+
                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                 <button class="btn btn-primary" type="submit" name="">Submit</button>
                                             </div>
@@ -327,6 +490,20 @@ include "./config/database.php";
                 },
                 success: function(msg) {
                     $("#productid").html(msg)
+                }
+
+            })
+        }
+
+        function _getBudgetSubType(budgettype_id) {
+            $.ajax({
+                type: "POST",
+                url: "script-budgetsubtype-ajax.php",
+                data: {
+                    budgettype_id: budgettype_id
+                },
+                success: function(msg) {
+                    $("#budgettype_sub_id").html(msg)
                 }
 
             })
