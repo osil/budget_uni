@@ -5,7 +5,7 @@ include "./config/global.php";
 include "./config/database.php";
 
 $periodid = $_SESSION['sess-bgu-periodid'];
-
+$actual_link = "http://$_SERVER[HTTP_HOST]";
 ?>
 <!doctype html>
 <html lang="th">
@@ -56,7 +56,7 @@ $periodid = $_SESSION['sess-bgu-periodid'];
                                 <div class="card-body">
 
                                     <!-- Row start -->
-                                    <form class="needs-validation" novalidate>
+                                    <form class="needs-validation" id="form-plan" name="form-plan" novalidate>
                                         <div class="row gutters">
                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-12">
                                                 <div class="form-section-header">บันทึกงบประมาณรายจ่ายเงินรายได้ประจำปีงบประมาณ <?php echo $_SESSION['sess-bgu-periodid'] ?></div>
@@ -65,7 +65,7 @@ $periodid = $_SESSION['sess-bgu-periodid'];
 
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
-                                                    <select class="select-single js-states form-select required" data-live-search="true" id="budgetgroup_id" name="budgetgroup_id" required>
+                                                    <select class="select-single js-states form-select required" data-live-search="true" id="budgetgroup_id" name="budgetgroup_id" onchange="_budgetgroup()" required>
                                                         <option value="">เลือกประเภทงบประมาณ</option>
                                                         <?php
 
@@ -139,7 +139,7 @@ $periodid = $_SESSION['sess-bgu-periodid'];
 
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
-                                                    <select class="select-single js-states form-select required" data-live-search="true" id="strategyuid" name="strategyuid" required>
+                                                    <select class="select-single js-states form-select required" data-live-search="true" id="strategyuid" name="strategyuid" onchange="_strategyu()" required>
                                                         <option value="">เลือกประเภทยุทธศาสตร์</option>
                                                         <?php
 
@@ -211,7 +211,7 @@ $periodid = $_SESSION['sess-bgu-periodid'];
                                             </div>
 
                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-12">
-                                                <div class="form-section-header">รายละเอียดการ <span class="title-info">We'll never share your with anyone.</span></div>
+                                                <div class="form-section-header">รายละเอียดการ <span class="title-info"></span></div>
                                             </div>
                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
@@ -239,7 +239,7 @@ $periodid = $_SESSION['sess-bgu-periodid'];
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
                                                     <div class="input-group">
-                                                        <input class="form-control" type="number" min="0" id="m1" name="m1" required>
+                                                        <input class="form-control" type="number" min="0" id="m1" name="m1" value="0" required>
                                                         <span class="input-group-text">
                                                             <i class="icon-dollar-sign"></i>
                                                         </span>
@@ -254,7 +254,7 @@ $periodid = $_SESSION['sess-bgu-periodid'];
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
                                                     <div class="input-group">
-                                                        <input class="form-control" type="number" min="0" id="m2" name="m2" required>
+                                                        <input class="form-control" type="number" min="0" id="m2" name="m2" value="0" required>
                                                         <span class="input-group-text">
                                                             <i class="icon-dollar-sign"></i>
                                                         </span>
@@ -269,7 +269,7 @@ $periodid = $_SESSION['sess-bgu-periodid'];
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
                                                     <div class="input-group">
-                                                        <input class="form-control" type="number" min="0" id="m3" name="m3" required>
+                                                        <input class="form-control" type="number" min="0" id="m3" name="m3" value="0" required>
                                                         <span class="input-group-text">
                                                             <i class="icon-dollar-sign"></i>
                                                         </span>
@@ -285,7 +285,7 @@ $periodid = $_SESSION['sess-bgu-periodid'];
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
                                                     <div class="input-group">
-                                                        <input class="form-control" type="number" min="0" id="m4" name="m4" required>
+                                                        <input class="form-control" type="number" min="0" id="m4" name="m4" value="0" required>
                                                         <span class="input-group-text">
                                                             <i class="icon-dollar-sign"></i>
                                                         </span>
@@ -301,7 +301,7 @@ $periodid = $_SESSION['sess-bgu-periodid'];
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
                                                     <div class="input-group">
-                                                        <input class="form-control" type="number" min="0" id="m5" name="m5" required>
+                                                        <input class="form-control" type="number" min="0" id="m5" name="m5" value="0" required>
                                                         <span class="input-group-text">
                                                             <i class="icon-dollar-sign"></i>
                                                         </span>
@@ -316,7 +316,7 @@ $periodid = $_SESSION['sess-bgu-periodid'];
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
                                                     <div class="input-group">
-                                                        <input class="form-control" type="number" min="0" id="m6" name="m6" required>
+                                                        <input class="form-control" type="number" min="0" id="m6" name="m6" value="0" required>
                                                         <span class="input-group-text">
                                                             <i class="icon-dollar-sign"></i>
                                                         </span>
@@ -331,7 +331,7 @@ $periodid = $_SESSION['sess-bgu-periodid'];
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
                                                     <div class="input-group">
-                                                        <input class="form-control" type="number" min="0" id="m7" name="m7" required>
+                                                        <input class="form-control" type="number" min="0" id="m7" name="m7" value="0" required>
                                                         <span class="input-group-text">
                                                             <i class="icon-dollar-sign"></i>
                                                         </span>
@@ -346,7 +346,7 @@ $periodid = $_SESSION['sess-bgu-periodid'];
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
                                                     <div class="input-group">
-                                                        <input class="form-control" type="number" min="0" id="m8" name="m8" required>
+                                                        <input class="form-control" type="number" min="0" id="m8" name="m8" value="0" required>
                                                         <span class="input-group-text">
                                                             <i class="icon-dollar-sign"></i>
                                                         </span>
@@ -361,7 +361,7 @@ $periodid = $_SESSION['sess-bgu-periodid'];
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
                                                     <div class="input-group">
-                                                        <input class="form-control" type="number" min="0" id="m9" name="m9" required>
+                                                        <input class="form-control" type="number" min="0" id="m9" name="m9" value="0" required>
                                                         <span class="input-group-text">
                                                             <i class="icon-dollar-sign"></i>
                                                         </span>
@@ -376,7 +376,7 @@ $periodid = $_SESSION['sess-bgu-periodid'];
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
                                                     <div class="input-group">
-                                                        <input class="form-control" type="number" min="0" id="m10" name="m10" required>
+                                                        <input class="form-control" type="number" min="0" id="m10" name="m10" value="0" required>
                                                         <span class="input-group-text">
                                                             <i class="icon-dollar-sign"></i>
                                                         </span>
@@ -391,7 +391,7 @@ $periodid = $_SESSION['sess-bgu-periodid'];
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
                                                     <div class="input-group">
-                                                        <input class="form-control" type="number" min="0" id="m11" name="m11" required>
+                                                        <input class="form-control" type="number" min="0" id="m11" name="m11" value="0" required>
                                                         <span class="input-group-text">
                                                             <i class="icon-dollar-sign"></i>
                                                         </span>
@@ -406,7 +406,7 @@ $periodid = $_SESSION['sess-bgu-periodid'];
                                                 <!-- Field wrapper start -->
                                                 <div class="field-wrapper">
                                                     <div class="input-group">
-                                                        <input class="form-control" type="number" min="0" id="m12" name="m12" required>
+                                                        <input class="form-control" type="number" min="0" id="m12" name="m12" value="0" required>
                                                         <span class="input-group-text">
                                                             <i class="icon-dollar-sign"></i>
                                                         </span>
@@ -420,11 +420,59 @@ $periodid = $_SESSION['sess-bgu-periodid'];
 
 
                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                <button class="btn btn-primary" type="submit" name="">Submit</button>
+                                                <button class="btn btn-primary" type="submit" name="formsubmit" id="formsubmit">บันทึก</button>
                                             </div>
                                         </div>
                                         <!-- Row end -->
                                     </form>
+
+                                </div>
+                            </div>
+                            <!-- Card end -->
+
+                        </div>
+                    </div>
+                    <!-- Row end -->
+
+
+                    <!-- Row start -->
+                    <div class="row gutters" id="detail">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12" id="detail_list">
+                            <!-- Card start -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <ul class="list-group m-0">
+                                        <li class="list-group-item active">รายละเอียด</li>
+                                        <li class="list-group-item"><b>งบประมาณ : </b> <span id="budgetgroup_name"></span></li>
+                                        <li class="list-group-item"><b>แผน : </b> <span id="plan_name"></span></li>
+                                        <li class="list-group-item"><b>โครงการ : </b> <span id="product_name"></span></li>
+                                        <li class="list-group-item"><b>ยุทธศาสตร์ : </b> <span id="strategyu_name"></span></li>
+                                        <li class="list-group-item"><b>งบ : </b> <span id="budgettype_name"></span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Card end -->
+                        </div>
+                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+
+                            <!-- Card start -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-12">
+                                        <div class="alert alert-primary" role="alert">
+                                            ตารางข้อมูลงบประมาณรายจ่ายเงินรายได้ประจำปีงบประมาณ
+                                        </div>
+
+
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div id="detail_table">
+
+                                        </div>
+                                    </div>
+
+
+
 
                                 </div>
                             </div>
@@ -462,6 +510,8 @@ $periodid = $_SESSION['sess-bgu-periodid'];
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {
+
+            $("#detail").hide();
             'use strict'
 
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -474,14 +524,76 @@ $periodid = $_SESSION['sess-bgu-periodid'];
                         if (!form.checkValidity()) {
                             event.preventDefault()
                             event.stopPropagation()
+
+                        } else {
+                            const budgetgroup_id = $("#budgetgroup_id").val();
+                            const planid = $("#planid").val();
+                            const productid = $("#productid").val();
+                            const strategyuid = $("#strategyuid").val();
+                            const budgettype_id = $("#budgettype_id").val();
+                            const departmentid = <?php echo $_SESSION["sess-bgu-departmentid"] ?>;
+                            const periodid = <?php echo $periodid ?>;
+                            const projectname = $("#projectname").val();
+                            const m1 = $("#m1").val();
+                            const m2 = $("#m2").val();
+                            const m3 = $("#m3").val();
+                            const m4 = $("#m4").val();
+                            const m5 = $("#m5").val();
+                            const m6 = $("#m6").val();
+                            const m7 = $("#m7").val();
+                            const m8 = $("#m8").val();
+                            const m9 = $("#m9").val();
+                            const m10 = $("#m10").val();
+                            const m11 = $("#m11").val();
+                            const m12 = $("#m12").val();
+
+                            $.ajax({
+                                type: "POST",
+                                url: "script-insertproject-ajax.php",
+                                data: {
+                                    budgetgroup_id,
+                                    planid,
+                                    productid,
+                                    strategyuid,
+                                    budgettype_id,
+                                    departmentid,
+                                    periodid,
+                                    projectname,
+                                    m1,
+                                    m2,
+                                    m3,
+                                    m4,
+                                    m5,
+                                    m6,
+                                    m7,
+                                    m8,
+                                    m9,
+                                    m10,
+                                    m11,
+                                    m12
+                                },
+                                success: function(msg) {
+                                    console.log(msg);
+                                }
+
+                            })
+
+
                         }
 
                         form.classList.add('was-validated')
+
                     }, false)
+
                 })
+
+
         })()
 
         function _getProduct(planid) {
+            $("#strategyuid").val("").change();
+            $("#budgettype_id").val("").change();
+            $("#budgettype_sub_id").val("").change();
             $.ajax({
                 type: "POST",
                 url: "script-product-ajax.php",
@@ -496,6 +608,7 @@ $periodid = $_SESSION['sess-bgu-periodid'];
         }
 
         function _getBudgetSubType(budgettype_id) {
+            _getDataByBudgettype();
             $.ajax({
                 type: "POST",
                 url: "script-budgetsubtype-ajax.php",
@@ -508,6 +621,98 @@ $periodid = $_SESSION['sess-bgu-periodid'];
 
             })
         }
+
+        function _budgetgroup() {
+            $("#planid").val("").change();
+            $("#productid").val("").change();
+            $("#strategyuid").val("").change();
+            $("#budgettype_id").val("").change();
+            $("#budgettype_sub_id").val("").change();
+        }
+
+        function _strategyu() {
+            $("#budgettype_id").val("").change();
+            $("#budgettype_sub_id").val("").change();
+        }
+
+        function _getDataByBudgettype() {
+            const budgetgroup_id = $("#budgetgroup_id").val();
+            const planid = $("#planid").val();
+            const productid = $("#productid").val();
+            const strategyuid = $("#strategyuid").val();
+            const budgettype_id = $("#budgettype_id").val();
+            const departmentid = <?php echo $_SESSION["sess-bgu-departmentid"] ?>;
+            const periodid = <?php echo $periodid ?>;
+            // console.log("budgetgroup_id : " + budgetgroup_id);
+            // console.log("planid : " + planid);
+            // console.log("productid : " + productid);
+            // console.log("strategyuid : " + strategyuid);
+            // console.log("budgettype_id : " + budgettype_id);
+            // console.log("departmentid : " + departmentid);
+            // console.log("periodid : " + periodid);
+
+            if (budgetgroup_id != "" && planid != "" && productid != "" && strategyuid != "" && budgettype_id) {
+
+                _getDetailList(budgetgroup_id, planid, productid, strategyuid, budgettype_id, departmentid, periodid);
+
+                $("#detail").show();
+                _getDetailTable(budgetgroup_id, planid, productid, strategyuid, budgettype_id, departmentid, periodid);
+
+
+            } else {
+                $("#detail").hide();
+            }
+        }
+
+        function _getDetailList(budgetgroup_id, planid, productid, strategyuid, budgettype_id, departmentid, periodid) {
+            $.ajax({
+                type: "POST",
+                url: "script-getdetaillist-ajax.php",
+                data: {
+                    budgetgroup_id,
+                    planid,
+                    productid,
+                    strategyuid,
+                    budgettype_id,
+                    departmentid,
+                    periodid
+                },
+                success: function(msg) {
+                    $("#detail_list").html(msg)
+                }
+
+            })
+        }
+
+        function _getDetailTable(budgetgroup_id, planid, productid, strategyuid, budgettype_id, departmentid, periodid) {
+            $.ajax({
+                type: "POST",
+                url: "script-getdetailtable-ajax.php",
+                data: {
+                    budgetgroup_id,
+                    planid,
+                    productid,
+                    strategyuid,
+                    budgettype_id,
+                    departmentid,
+                    periodid
+                },
+                success: function(msg) {
+                    $("#detail_table").html(msg)
+                }
+
+            })
+        }
+
+        $("#form-plan").submit(function(event) {
+
+            /* stop form from submitting normally */
+            event.preventDefault();
+
+
+
+
+        });
     </script>
 
 
