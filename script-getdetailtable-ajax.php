@@ -85,8 +85,8 @@ $i = 1;
                     <td class="text-center"><?php echo $data['budgettype_sub_name']; ?></td>
                     <td class="text-center"><?php echo $data['sum_budget']; ?></td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-sm btn-outline-warning">แก้ไข</button>
-                        <button type="button" class="btn btn-sm btn-outline-danger">ลบ</button>
+                        <button type="button" class="btn btn-sm btn-outline-warning" onclick="_editProject(<?php echo $data['projectid']; ?>)">แก้ไข</button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="_delProject(<?php echo $data['projectid']; ?>)">ลบ</button>
                     </td>
                 </tr>
             <?php $i++;

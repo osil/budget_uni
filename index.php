@@ -87,345 +87,131 @@ include "./config/database.php";
                         </div>
                     </div>
                     <!-- Row end -->
-
-                    <!-- Row start -->
-                    <div class="row gutters">
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                            <div class="stats-tile">
-                                <div class="sale-icon">
-                                    <i class="icon-shopping-bag1"></i>
-                                </div>
-                                <div class="sale-details">
-                                    <h2>25</h2>
-                                    <p><?php echo $file_name ?></p>
-                                </div>
-                                <div class="sale-graph">
-                                    <div id="sparklineLine1"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                            <div class="stats-tile">
-                                <div class="sale-icon">
-                                    <i class="icon-shopping-bag1"></i>
-                                </div>
-                                <div class="sale-details">
-                                    <h2>32</h2>
-                                    <p>Orders</p>
-                                </div>
-                                <div class="sale-graph">
-                                    <div id="sparklineLine2"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-                            <div class="stats-tile">
-                                <div class="sale-icon">
-                                    <i class="icon-check-circle"></i>
-                                </div>
-                                <div class="sale-details">
-                                    <h2>19</h2>
-                                    <p>Customers</p>
-                                </div>
-                                <div class="sale-graph">
-                                    <div id="sparklineLine3"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Row end -->
-
-                    <!-- Row start -->
-                    <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 cool-12">
-
-                            <div class="card">
-                                <div class="card-body">
-                                    <!-- Row start -->
-                                    <div class="row gutters">
-                                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-12">
-                                            <div class="reports-summary">
-                                                <div class="reports-summary-block">
-                                                    <h5>Great Sales</h5>
-                                                    <h6>Overall sales of the month</h6>
-                                                </div>
-                                                <div class="reports-summary-block">
-                                                    <h5>35 Millions</h5>
-                                                    <h6>Overall earnings</h6>
-                                                </div>
-                                                <div class="reports-summary-block">
-                                                    <h5>27 Millions</h5>
-                                                    <h6>Overall revenue</h6>
-                                                </div>
-                                                <div class="reports-summary-block">
-                                                    <h5>67k</h5>
-                                                    <h6>New customers</h6>
-                                                </div>
-                                                <button class="btn btn-info stripes-btn">Generate Report</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-9 col-lg-9 col-md-8 col-sm-8 col-12">
-                                            <div class="row gutters">
-                                                <div class="col-12">
-                                                    <div class="graph-day-selection mt-2" role="group">
-                                                        <button type="button" class="btn active">Today</button>
-                                                        <button type="button" class="btn">Yesterday</button>
-                                                        <button type="button" class="btn">7 days</button>
-                                                        <button type="button" class="btn">15 days</button>
-                                                        <button type="button" class="btn">30 days</button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div id="salesGraph" class="chart-height-xl"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Row end -->
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- Row end -->
-
-                    <!-- Row start -->
-                    <div class="row gutters">
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
-
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="card-title">Visitors</div>
-                                    <div class="graph-day-selection" role="group">
-                                        <button type="button" class="btn active">Export</button>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div id="visitorsGraph" class="chart-height-md"></div>
-
-                                    <ul class="stats-list-container">
-                                        <li class="stats-list-item primary">
-                                            <div class="stats-icon">
-                                                <i class="icon-calendar1"></i>
-                                            </div>
-                                            <div class="stats-info">
-                                                <h6 class="stats-title">Week 1</h6>
-                                                <p class="stats-amount">25</p>
-                                            </div>
-                                        </li>
-                                        <li class="stats-list-item primary">
-                                            <div class="stats-icon">
-                                                <i class="icon-calendar1"></i>
-                                            </div>
-                                            <div class="stats-info">
-                                                <h6 class="stats-title">Week 2</h6>
-                                                <p class="stats-amount">32</p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
-
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="card-title">Orders</div>
-                                    <div class="graph-day-selection" role="group">
-                                        <button type="button" class="btn active">View All</button>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div id="ordersGraph" class="chart-height-md"></div>
-
-                                    <ul class="stats-list-container">
-                                        <li class="stats-list-item primary">
-                                            <div class="stats-icon">
-                                                <i class="icon-archive1"></i>
-                                            </div>
-                                            <div class="stats-info">
-                                                <h6 class="stats-title">New</h6>
-                                                <p class="stats-amount">15</p>
-                                            </div>
-                                        </li>
-                                        <li class="stats-list-item primary">
-                                            <div class="stats-icon">
-                                                <i class="icon-truck"></i>
-                                            </div>
-                                            <div class="stats-info">
-                                                <h6 class="stats-title">Delivered</h6>
-                                                <p class="stats-amount">10</p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
-
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="card-title">Earnings</div>
-                                    <div class="graph-day-selection" role="group">
-                                        <button type="button" class="btn active">Download</button>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div id="earningsGraph" class="chart-height-md"></div>
-
-                                    <ul class="stats-list-container">
-                                        <li class="stats-list-item primary">
-                                            <div class="stats-icon">
-                                                <i class="icon-briefcase"></i>
-                                            </div>
-                                            <div class="stats-info">
-                                                <h6 class="stats-title">Today</h6>
-                                                <p class="stats-amount">$25</p>
-                                            </div>
-                                        </li>
-                                        <li class="stats-list-item primary">
-                                            <div class="stats-icon">
-                                                <i class="icon-briefcase"></i>
-                                            </div>
-                                            <div class="stats-info">
-                                                <h6 class="stats-title">Yesterday</h6>
-                                                <p class="stats-amount">$18</p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- Row end -->
-
                     <!-- Row start -->
                     <div class="row gutters">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="card-title">Recent Orders</div>
-                                    <div class="graph-day-selection" role="group">
-                                        <button type="button" class="btn active">Export to Excel</button>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table products-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Order No.</th>
-                                                    <th>Ordered Date</th>
-                                                    <th>Product</th>
-                                                    <th>Delivery Status</th>
-                                                    <th>Amount</th>
-                                                    <th>Discount</th>
-                                                    <th>Location</th>
-                                                    <th>Est Delivery Date</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>#55589</td>
-                                                    <td>20/11/2020</td>
-                                                    <td>
-                                                        <img class="user" src="../../img/products/bag.jpeg" alt="Product Image">
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge">Moving</span>
-                                                    </td>
-                                                    <td>$385.00</td>
-                                                    <td>30%</td>
-                                                    <td>Los Angeles, California</td>
-                                                    <td>22/11/2020</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>#23198</td>
-                                                    <td>23/11/2020</td>
-                                                    <td>
-                                                        <img class="user" src="../../img/products/toy.jpeg" alt="Product Image">
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge">Shipped</span>
-                                                    </td>
-                                                    <td>$539.00</td>
-                                                    <td>25%</td>
-                                                    <td>Arverne, New York</td>
-                                                    <td>27/11/2020</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>#87324</td>
-                                                    <td>26/11/2020</td>
-                                                    <td>
-                                                        <img class="user" src="../../img/products/pencils.jpeg" alt="Product Image">
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge">Pending</span>
-                                                    </td>
-                                                    <td>$671.00</td>
-                                                    <td>35%</td>
-                                                    <td>Mesquite, Texas</td>
-                                                    <td>29/11/2020</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>#65673</td>
-                                                    <td>25/11/2020</td>
-                                                    <td>
-                                                        <img class="user" src="../../img/products/camera.jpeg" alt="Product Image">
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge">Cancelled</span>
-                                                    </td>
-                                                    <td>$490.00</td>
-                                                    <td>21%</td>
-                                                    <td>Hallandale, Florida</td>
-                                                    <td>26/11/2020</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Row end -->
 
-                    <!-- Row start -->
-                    <div class="row gutters">
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
-                            <div class="goal-container">
-                                <div class="goal-info">
-                                    <h5>Today's Goal</h5>
-                                    <h6>70/100</h6>
-                                </div>
-                                <div class="goal-graph">
-                                    <div id="todaysTarget"></div>
-                                    <div class="circle-one"></div>
-                                    <div class="circle-two"></div>
+                            <!-- Card start -->
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <!-- Faq start -->
+                                    <div class="accordion" id="faqAccordion">
+
+
+                                        <?php
+
+                                        $sql2 = "SELECT * FROM v_budgetegroup";
+
+                                        $params2 = array();
+                                        $result2 = $con->prepare($sql2);
+                                        $res2 = $result2->execute($params2);
+                                        while ($data2 = $result2->fetch()) {
+                                        ?>
+
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="heading<?php echo $data2['budgetgroup_id'] ?>">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $data2['budgetgroup_id'] ?>" aria-expanded="false" aria-controls="collapse<?php echo $data2['budgetgroup_id'] ?>">
+                                                        <?php echo $data2['budgetgroup_name'] ?>
+                                                    </button>
+                                                </h2>
+                                                <div id="collapse<?php echo $data2['budgetgroup_id'] ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $data2['budgetgroup_id'] ?>" data-bs-parent="#faqAccordion">
+                                                    <div class="accordion-body">
+                                                        <h5 class="text-center">งบ <?php echo $data2['budgetgroup_name'] ?></h5>
+
+                                                        <div class="table-responsive">
+                                                            <table class="table table-bordered table-striped m-0" style="vertical-align: middle;">
+                                                                <thead>
+                                                                    <tr class="text-center">
+
+                                                                        <th width="60%">รายละเอียดงบ</th>
+                                                                        <th width="40%">จำนวนเงิน</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php
+                                                                    $i = 1;
+                                                                    $sql = "SELECT
+                                                                    * 
+                                                                FROM
+                                                                    v_project p 
+                                                                WHERE
+                                                                    p.departmentid = :departmentid
+                                                                    AND p.budgetgroup_id = :budgetgroup_id
+                                                                    AND p.periodid = :periodid 
+                                                                ORDER BY
+                                                                    p.productid ASC";
+
+                                                                    $params = array(
+                                                                        'departmentid' => $_SESSION["sess-bgu-departmentid"],
+                                                                        'budgetgroup_id' => $data2['budgetgroup_id'],
+                                                                        'periodid' => $_SESSION["sess-bgu-periodid"]
+                                                                    );
+                                                                    $result = $con->prepare($sql);
+                                                                    $res = $result->execute($params);
+                                                                    while ($data1 = $result->fetch()) {
+                                                                    ?>
+
+                                                                        <tr>
+
+                                                                            <td style="vertical-align: top;">
+                                                                                <ul class="list-group m-0">
+                                                                                    <li class="list-group-item active"><b> ชื่อ : </b> <?php echo $data1['projectname'] ?></li>
+                                                                                    <li class="list-group-item"><b>งบประมาณ : </b> <?php echo $data1['budgetgroup_code'] . " " . $data1['budgetgroup_name'] ?></li>
+                                                                                    <li class="list-group-item"><b>แผน : </b> <?php echo $data1['PLANNAME'] ?></li>
+                                                                                    <li class="list-group-item"><b>โครงการ : </b> <?php echo $data1['PRODUCTNAME'] ?></li>
+                                                                                    <li class="list-group-item"><b>ยุทธศาสตร์ : </b> <?php echo $data1['STRATEGYUNAME'] ?></li>
+                                                                                    <li class="list-group-item"><b>งบ : </b> <?php echo $data1['budgettype_name'] ?></li>
+                                                                                </ul>
+                                                                            </td>
+                                                                            <td class="">
+                                                                                <div class="row">
+                                                                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                                                        <ol class="list-group">
+                                                                                            <li class="list-group-item"> ต.ค.<?php echo (substr($data1['periodid'], 2) - 1) . " : " . number_format($data1['m1']) . " บาท"; ?> </li>
+                                                                                            <li class="list-group-item"> พ.ย.<?php echo (substr($data1['periodid'], 2) - 1) . " : " . number_format($data1['m2']) . " บาท"; ?> </li>
+                                                                                            <li class="list-group-item"> ธ.ค.<?php echo (substr($data1['periodid'], 2) - 1) . " : " . number_format($data1['m3']) . " บาท"; ?> </li>
+                                                                                            <li class="list-group-item"> ม.ค.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m4']) . " บาท"; ?> </li>
+                                                                                            <li class="list-group-item"> ก.พ.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m5']) . " บาท"; ?> </li>
+                                                                                            <li class="list-group-item"> มี.ค.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m6']) . " บาท"; ?> </li>
+                                                                                        </ol>
+                                                                                    </div>
+                                                                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                                                        <ol class="list-group">
+
+                                                                                            <li class="list-group-item"> เม.ย.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m7']) . " บาท"; ?> </li>
+                                                                                            <li class="list-group-item"> พ.ค.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m8']) . " บาท"; ?> </li>
+                                                                                            <li class="list-group-item"> มิ.ย.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m9']) . " บาท"; ?> </li>
+                                                                                            <li class="list-group-item"> ก.ค.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m10']) . " บาท"; ?> </li>
+                                                                                            <li class="list-group-item"> ส.ค.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m11']) . " บาท"; ?> </li>
+                                                                                            <li class="list-group-item"> ก.ย.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m12']) . " บาท"; ?> </li>
+                                                                                        </ol>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </td>
+
+                                                                        </tr>
+                                                                    <?php $i++;
+                                                                    } ?>
+
+
+
+                                                            </table>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+
+                                    </div>
+                                    <!-- Faq end -->
+
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
-                            <div class="graph-card">
-                                <h6>New Customers</h6>
-                                <h4>2500</h4>
-                                <div class="graph-placeholder">
-                                    <div id="customersGraph"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
-                            <div class="payments-card">
-                                <h6>Balance</h6>
-                                <h4>$5699.89</h4>
-                                <div class="custom-btn-group mt-2">
-                                    <button class="btn btn-outline-primary"><i class="icon-credit-card"></i>Deposit</button>
-                                    <button class="btn btn-primary"><i class="icon-credit-card"></i>Withdraw</button>
-                                </div>
-                            </div>
+                            <!-- Card end -->
+
                         </div>
                     </div>
                     <!-- Row end -->

@@ -89,22 +89,6 @@ $actual_link = "http://$_SERVER[HTTP_HOST]";
                                                 <!-- Field wrapper end -->
 
                                             </div>
-                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-
-                                                <!-- Field wrapper start -->
-                                                <div class="field-wrapper">
-                                                    <select class="select-single js-states form-select required" data-live-search="true" id="strategy_id" name="strategy_id" onchange="_getTarget(this.value)" required>
-                                                        <option value="">เลือกยุทธศาสตร์</option>
-
-                                                    </select>
-                                                    <div class="field-placeholder">เลือกยุทธศาสตร์</div>
-                                                    <div class="invalid-feedback">
-                                                        * กรุณาเลือก
-                                                    </div>
-                                                </div>
-                                                <!-- Field wrapper end -->
-
-                                            </div>
 
 
 
@@ -673,22 +657,6 @@ $actual_link = "http://$_SERVER[HTTP_HOST]";
 
 
         })()
-
-        function _getStrategy(phase_id) {
-            //ดึงข้อมูลยุทธศาสตร
-            $.ajax({
-                type: "POST",
-                url: "script-getstrategy-ajax.php",
-                data: {
-                    phase_id
-                },
-                success: function(msg) {
-                    $("#strategy_id").html(msg)
-                }
-
-            })
-
-        }
 
         function _getProduct(planid) {
             $("#strategyuid").val("").change();
