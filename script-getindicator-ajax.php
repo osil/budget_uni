@@ -5,15 +5,15 @@ include "./config/global.php";
 include "./config/database.php";
 
 
-$phase_id = $_POST['phase_id'];
+$strategic_id = $_POST['strategic_id'];
 
 $sql = "SELECT * FROM
-strategy AS s
+`indicator` AS s
 WHERE
-s.phase_id = :phase_id";
+s.strategic_id = :strategic_id";
 
 $params = array(
-    'phase_id' => $phase_id
+    'strategic_id' => $strategic_id
 );
 $result = $con->prepare($sql);
 $res = $result->execute($params);
@@ -24,7 +24,7 @@ $row = $result->rowCount();
 
 
 
-<option value="">เลือกยุทธศาสตร์</option>
+<option value="">เลือกตัวชี้วัด</option>
 <?php while ($data = $result->fetch()) {
 ?>
     <option value="<?php echo $data['id'] ?>"><?php echo $data['code'] . " " . $data['name'] ?></option>

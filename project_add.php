@@ -105,6 +105,54 @@ $actual_link = "http://$_SERVER[HTTP_HOST]";
                                                 <!-- Field wrapper end -->
 
                                             </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+
+                                                <!-- Field wrapper start -->
+                                                <div class="field-wrapper">
+                                                    <select class="select-single js-states form-select required" data-live-search="true" id="target_id" name="target_id" onchange="_getStrategic(this.value)" required>
+                                                        <option value="">เลือกเป้าหมาย</option>
+
+                                                    </select>
+                                                    <div class="field-placeholder">เลือกเป้าหมาย</div>
+                                                    <div class="invalid-feedback">
+                                                        * กรุณาเลือก
+                                                    </div>
+                                                </div>
+                                                <!-- Field wrapper end -->
+
+                                            </div>
+
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+
+                                                <!-- Field wrapper start -->
+                                                <div class="field-wrapper">
+                                                    <select class="select-single js-states form-select required" data-live-search="true" id="strategic_id" name="strategic_id" onchange="_getIndicator(this.value)" required>
+                                                        <option value="">เลือกกลยุทธ</option>
+
+                                                    </select>
+                                                    <div class="field-placeholder">เลือกกลยุทธ</div>
+                                                    <div class="invalid-feedback">
+                                                        * กรุณาเลือก
+                                                    </div>
+                                                </div>
+                                                <!-- Field wrapper end -->
+
+                                            </div>
+
+                                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
+                                                <div class="field-wrapper">
+                                                    <select class="select-multiple js-states" title="Select Product Category" multiple="multiple" id="indicator_id" name="indicator_id[]" required>
+                                                        <option>เลือกตัวชี้วัด</option>
+
+                                                    </select>
+                                                    <div class="field-placeholder">เลือกตัวชี้วัด</div>
+                                                    <div class="invalid-feedback">
+                                                        * กรุณาเลือก
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
 
 
 
@@ -185,6 +233,7 @@ $actual_link = "http://$_SERVER[HTTP_HOST]";
                                                 <!-- Field wrapper end -->
 
                                             </div>
+
                                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 
                                                 <!-- Field wrapper start -->
@@ -577,6 +626,18 @@ $actual_link = "http://$_SERVER[HTTP_HOST]";
                             event.stopPropagation()
 
                         } else {
+
+                            // var select = document.getElementById('indicator_id');
+                            // var selected = [...select.selectedOptions]
+                            //     .map(option => option.value);
+
+                            const phase_id = $("#phase_id").val();
+                            const strategy_id = $("#strategy_id").val();
+                            const target_id = $("#target_id").val();
+                            const strategic_id = $("#strategic_id").val();
+                            const indicator_id = $("#indicator_id").val();
+                            //console.log(indicator_id);
+
                             const budgetgroup_id = $("#budgetgroup_id").val();
                             const planid = $("#planid").val();
                             const productid = $("#productid").val();
@@ -603,6 +664,11 @@ $actual_link = "http://$_SERVER[HTTP_HOST]";
                                 type: "POST",
                                 url: "script-insertproject-ajax.php",
                                 data: {
+                                    phase_id,
+                                    strategy_id,
+                                    target_id,
+                                    strategic_id,
+                                    indicator_id,
                                     budgetgroup_id,
                                     planid,
                                     productid,
@@ -626,6 +692,7 @@ $actual_link = "http://$_SERVER[HTTP_HOST]";
                                     m12
                                 },
                                 success: function(msg) {
+                                    console.log(msg);
                                     if (msg === 'ok') {
                                         Swal.fire({
 
@@ -676,6 +743,10 @@ $actual_link = "http://$_SERVER[HTTP_HOST]";
 
         function _getStrategy(phase_id) {
             //ดึงข้อมูลยุทธศาสตร
+            $("#strategy_id").val("").change();
+            $("#target_id").val("").change();
+            $("#strategic_id").val("").change();
+            $("#indicator_id").val("").change();
             $.ajax({
                 type: "POST",
                 url: "script-getstrategy-ajax.php",
@@ -688,6 +759,60 @@ $actual_link = "http://$_SERVER[HTTP_HOST]";
 
             })
 
+        }
+
+        function _getTarget(strategy_id) {
+            //ดึงข้อมูลเป้าหมายจาก table target
+            $("#target_id").val("").change();
+            $("#strategic_id").val("").change();
+            $("#indicator_id").val("").change();
+
+            $.ajax({
+                type: "POST",
+                url: "script-gettarget-ajax.php",
+                data: {
+                    strategy_id
+                },
+                success: function(msg) {
+                    $("#target_id").html(msg)
+                }
+
+            })
+        }
+
+        function _getStrategic(target_id) {
+            //ดึงข้อมูลเป้าหมายจาก table Strategic
+            $("#strategic_id").val("").change();
+            $("#indicator_id").val("").change();
+
+            $.ajax({
+                type: "POST",
+                url: "script-getstrategic-ajax.php",
+                data: {
+                    target_id
+                },
+                success: function(msg) {
+                    $("#strategic_id").html(msg)
+                }
+
+            })
+        }
+
+        function _getIndicator(strategic_id) {
+            //ดึงข้อมูลเป้าหมายจาก table Indicator
+            $("#indicator_id").val("").change();
+
+            $.ajax({
+                type: "POST",
+                url: "script-getindicator-ajax.php",
+                data: {
+                    strategic_id
+                },
+                success: function(msg) {
+                    $("#indicator_id").html(msg)
+                }
+
+            })
         }
 
         function _getProduct(planid) {
