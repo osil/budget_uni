@@ -169,6 +169,6 @@ VALUES
   echo "ok";
 } catch (PDOException $ex) {
   // ถ้ามีบางอย่างผิดพลาด ก็ให้ rollback ทั้งหมดไม่บันทึก
-  $Conn->rollBack();
+  $con->rollBack();
   die($ex->getMessage());
 }
