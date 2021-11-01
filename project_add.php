@@ -692,7 +692,7 @@ $actual_link = "http://$_SERVER[HTTP_HOST]";
                                     m12
                                 },
                                 success: function(msg) {
-                                    console.log(msg);
+                                    //console.log(msg);
                                     if (msg === 'ok') {
                                         Swal.fire({
 
