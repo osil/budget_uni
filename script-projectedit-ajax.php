@@ -31,7 +31,11 @@ m10,
 m11, 
 m12, 
 FORMAT((m1+m2+m3+m4+m5+m6+m7+m8+m9+m10+m11+m12),0) as sum_budget,
-b.budgettype_sub_name
+b.budgettype_sub_name,
+`phase_id`,
+`strategy_id`,
+`target_id`,
+`strategic_id`
 FROM
 project AS s
 INNER JOIN
@@ -63,6 +67,204 @@ $default = $result->fetch();
             </div>
 
         </div>
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-12">
+            <div class="form-section-header">แก้ไขยุทธศาสตร์</div>
+        </div>
+
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+
+            <!-- Field wrapper start -->
+            <div class="field-wrapper">
+                <select class="select-single js-states form-select required" data-live-search="true" id="phase_id" name="phase_id" onchange="_getStrategy(this.value)" required>
+                    <option value="">เลือกแผนยุทธศาสตร์</option>
+                    <?php
+
+                    $sql = "SELECT * FROM tb_phase";
+
+                    $params = array();
+                    $result = $con->prepare($sql);
+                    $res = $result->execute($params);
+                    $row = $result->rowCount();
+                    while ($data = $result->fetch()) {
+                    ?>
+                        <option value="<?php echo $data['id'] ?>" <?php
+                                                                    if ($data['id'] == $default['phase_id']) {
+                                                                        echo "selected";
+                                                                    }
+                                                                    ?>><?php echo $data['name'] ?></option>
+                    <?php } ?>
+                </select>
+                <div class="field-placeholder">เลือกแผนยุทธศาสตร์</div>
+                <div class="invalid-feedback">
+                    * กรุณาเลือก
+                </div>
+            </div>
+            <!-- Field wrapper end -->
+
+        </div>
+
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+
+            <!-- Field wrapper start -->
+            <div class="field-wrapper">
+                <select class="select-single js-states form-select required" data-live-search="true" id="strategy_id" name="strategy_id" onchange="_getTarget(this.value)" required>
+                    <option value="">เลือกยุทธศาสตร์</option>
+                    <?php
+
+                    $sql = "SELECT * FROM
+                    strategy AS s
+                    WHERE
+                    s.phase_id = :phase_id";
+
+                    $params = array(
+                        'phase_id' => $default['phase_id']
+                    );
+                    $result = $con->prepare($sql);
+                    $res = $result->execute($params);
+                    $row = $result->rowCount();
+                    while ($data = $result->fetch()) {
+                    ?>
+                        <option value="<?php echo $data['id'] ?>" <?php
+                                                                    if ($data['id'] == $default['strategy_id']) {
+                                                                        echo "selected";
+                                                                    }
+                                                                    ?>><?php echo $data['code'] . " " . $data['name'] ?></option>
+                    <?php } ?>
+
+                </select>
+                <div class="field-placeholder">เลือกยุทธศาสตร์</div>
+                <div class="invalid-feedback">
+                    * กรุณาเลือก
+                </div>
+            </div>
+            <!-- Field wrapper end -->
+
+        </div>
+
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+
+            <!-- Field wrapper start -->
+            <div class="field-wrapper">
+                <select class="select-single js-states form-select required" data-live-search="true" id="target_id" name="target_id" onchange="_getStrategic(this.value)" required>
+                    <option value="">เลือกเป้าหมาย</option>
+                    <?php
+
+                    $sql = "SELECT * FROM
+                    `target` AS s
+                    WHERE
+                    s.strategy_id = :strategy_id";
+
+                    $params = array(
+                        'strategy_id' => $default['strategy_id']
+                    );
+                    $result = $con->prepare($sql);
+                    $res = $result->execute($params);
+                    $row = $result->rowCount();
+                    while ($data = $result->fetch()) {
+                    ?>
+                        <option value="<?php echo $data['id'] ?>" <?php
+                                                                    if ($data['id'] == $default['target_id']) {
+                                                                        echo "selected";
+                                                                    }
+                                                                    ?>><?php echo $data['code'] . " " . $data['name'] ?></option>
+                    <?php } ?>
+
+                </select>
+                <div class="field-placeholder">เลือกเป้าหมาย</div>
+                <div class="invalid-feedback">
+                    * กรุณาเลือก
+                </div>
+            </div>
+            <!-- Field wrapper end -->
+
+        </div>
+
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+
+            <!-- Field wrapper start -->
+            <div class="field-wrapper">
+                <select class="select-single js-states form-select required" data-live-search="true" id="strategic_id" name="strategic_id" onchange="_getIndicator(this.value)" required>
+                    <option value="">เลือกกลยุทธ</option>
+                    <?php
+
+                    $sql = "SELECT * FROM
+                        `strategic` AS s
+                        WHERE
+                        s.target_id = :target_id";
+
+                    $params = array(
+                        'target_id' => $default['target_id']
+                    );
+                    $result = $con->prepare($sql);
+                    $res = $result->execute($params);
+                    $row = $result->rowCount();
+                    while ($data = $result->fetch()) {
+                    ?>
+                        <option value="<?php echo $data['id'] ?>" <?php
+                                                                    if ($data['id'] == $default['strategic_id']) {
+                                                                        echo "selected";
+                                                                    }
+                                                                    ?>><?php echo $data['code'] . " " . $data['name'] ?></option>
+                    <?php } ?>
+
+                </select>
+                <div class="field-placeholder">เลือกกลยุทธ</div>
+                <div class="invalid-feedback">
+                    * กรุณาเลือก
+                </div>
+            </div>
+            <!-- Field wrapper end -->
+
+        </div>
+
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
+            <div class="field-wrapper">
+                <select class="select-multiple js-states" title="Select Product Category" multiple="multiple" id="indicator_id" name="indicator_id[]" required>
+                    <option>เลือกตัวชี้วัด</option>
+                    <?php
+
+                    $sql = "SELECT
+                    a.*,
+                IF
+                    ( ISNULL( bb.project_id ), 0, 1 ) AS ind_status 
+                FROM
+                    indicator a
+                    LEFT JOIN ( SELECT project_id, indicator_id FROM project_indicator b WHERE b.`project_id` = :project_id ) bb ON a.id = bb.indicator_id 
+                WHERE
+                    a.`strategic_id` = :strategic_id";
+
+                    $params = array(
+                        'strategic_id' => $default['strategic_id'],
+                        'project_id' => $default['projectid']
+                    );
+                    $result = $con->prepare($sql);
+                    $res = $result->execute($params);
+                    $row = $result->rowCount();
+                    while ($data = $result->fetch()) {
+                    ?>
+
+                        <option value="<?php echo $data['id'] ?>" <?php if ($data['ind_status'] == '1') {
+                                                                        echo "selected";
+                                                                    } ?>><?php echo $data['code'] . " " . $data['name'] . '' . $data['ind_status']  ?></option>
+                    <?php
+                    } ?>
+
+                </select>
+                <div class="field-placeholder">เลือกตัวชี้วัด</div>
+                <div class="invalid-feedback">
+                    * กรุณาเลือก
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-12">
+            <div class="form-section-header">แก้ไขงบประมาณรายจ่ายเงินรายได้</div>
+        </div>
+
         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 
             <input type="hidden" name="projectid" id="projectid" value="<?php echo $default['projectid'] ?>" />
