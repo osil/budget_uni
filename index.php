@@ -123,9 +123,9 @@ include "./config/database.php";
                                                             <table class="table table-bordered table-striped m-0" style="vertical-align: middle;">
                                                                 <thead>
                                                                     <tr class="text-center">
-
-                                                                        <th width="60%">รายละเอียดงบ</th>
-                                                                        <th width="40%">จำนวนเงิน</th>
+                                                                        <th>รายละเอียดงบ</th>
+                                                                        <th style="width: 40%;">จำนวนเงิน</th>
+                                                                        <th>option</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -154,41 +154,80 @@ include "./config/database.php";
 
                                                                         <tr>
 
+
+
                                                                             <td style="vertical-align: top;">
-                                                                                <ul class="list-group m-0">
-                                                                                    <li class="list-group-item active"><b> ชื่อ : </b> <?php echo $data1['projectname'] ?></li>
+                                                                                <ul class="list-group">
+                                                                                    <li class="list-group-item active"><b> ชื่อ : </b> <?php echo $data1['projectname']  ?></li>
                                                                                     <li class="list-group-item"><b>งบประมาณ : </b> <?php echo $data1['budgetgroup_code'] . " " . $data1['budgetgroup_name'] ?></li>
                                                                                     <li class="list-group-item"><b>แผน : </b> <?php echo $data1['PLANNAME'] ?></li>
                                                                                     <li class="list-group-item"><b>โครงการ : </b> <?php echo $data1['PRODUCTNAME'] ?></li>
                                                                                     <li class="list-group-item"><b>ยุทธศาสตร์ : </b> <?php echo $data1['STRATEGYUNAME'] ?></li>
                                                                                     <li class="list-group-item"><b>งบ : </b> <?php echo $data1['budgettype_name'] ?></li>
                                                                                 </ul>
-                                                                            </td>
-                                                                            <td class="">
-                                                                                <div class="row">
-                                                                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                                                                        <ol class="list-group">
-                                                                                            <li class="list-group-item"> ต.ค.<?php echo (substr($data1['periodid'], 2) - 1) . " : " . number_format($data1['m1']) . " บาท"; ?> </li>
-                                                                                            <li class="list-group-item"> พ.ย.<?php echo (substr($data1['periodid'], 2) - 1) . " : " . number_format($data1['m2']) . " บาท"; ?> </li>
-                                                                                            <li class="list-group-item"> ธ.ค.<?php echo (substr($data1['periodid'], 2) - 1) . " : " . number_format($data1['m3']) . " บาท"; ?> </li>
-                                                                                            <li class="list-group-item"> ม.ค.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m4']) . " บาท"; ?> </li>
-                                                                                            <li class="list-group-item"> ก.พ.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m5']) . " บาท"; ?> </li>
-                                                                                            <li class="list-group-item"> มี.ค.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m6']) . " บาท"; ?> </li>
-                                                                                        </ol>
-                                                                                    </div>
-                                                                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                                                                        <ol class="list-group">
+                                                                                <ul class="list-group">
+                                                                                    <li class="list-group-item list-group-item-dark"><b> แผนยุทธศาสตร์ : </b> <span class="text-break"><?php echo $data1['phase_name'] ?></span></li>
+                                                                                    <li class="list-group-item"><b>ยุทธศาสตร์ : </b> <span class="text-break"><?php echo $data1['strategy_code'] . " " . $data1['strategy_name'] ?></span></li>
+                                                                                    <li class="list-group-item"><b>เป้าหมาย : </b> <span class="text-break"><?php echo $data1['target_code'] . " " . $data1['target_name'] ?></span></li>
+                                                                                    <li class="list-group-item"><b>กลยุทธ : </b> <span class="text-break"><?php echo $data1['strategic_code'] . " " . $data1['strategic_name'] ?></span></li>
+                                                                                    <li class="list-group-item"><b>ตัวชี้วัด : </b>
+                                                                                        <?php
+                                                                                        $sql3 = "SELECT
+                                                                                    p.project_id,
+                                                                                    p.indicator_id,
+                                                                                    i.`code`,
+                                                                                    i.`name` 
+                                                                                FROM
+                                                                                    project_indicator AS p
+                                                                                    INNER JOIN indicator AS i ON i.id = p.indicator_id 
+                                                                                WHERE
+                                                                                    p.project_id = :project_id";
 
-                                                                                            <li class="list-group-item"> เม.ย.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m7']) . " บาท"; ?> </li>
-                                                                                            <li class="list-group-item"> พ.ค.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m8']) . " บาท"; ?> </li>
-                                                                                            <li class="list-group-item"> มิ.ย.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m9']) . " บาท"; ?> </li>
-                                                                                            <li class="list-group-item"> ก.ค.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m10']) . " บาท"; ?> </li>
-                                                                                            <li class="list-group-item"> ส.ค.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m11']) . " บาท"; ?> </li>
-                                                                                            <li class="list-group-item"> ก.ย.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m12']) . " บาท"; ?> </li>
-                                                                                        </ol>
-                                                                                    </div>
+                                                                                        $params3 = array(
+                                                                                            'project_id' => $data1['projectid']
+                                                                                        );
+                                                                                        $result3 = $con->prepare($sql3);
+                                                                                        $res3 = $result3->execute($params3);
+                                                                                        while ($data3 = $result3->fetch()) {
+                                                                                        ?>
+                                                                                            <br />
+                                                                                            <span class="badge bg-secondary"><?php echo $data3['code'] . " " . $data3['name'] ?></span>
+                                                                                        <?php } ?>
+
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </td>
+                                                                            <td class="" style="vertical-align: top;">
+
+                                                                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                                                    <ol class="list-group">
+                                                                                        <li class="list-group-item"> ต.ค.<?php echo (substr($data1['periodid'], 2) - 1) . " : " . number_format($data1['m1']) . " บาท"; ?> </li>
+                                                                                        <li class="list-group-item"> พ.ย.<?php echo (substr($data1['periodid'], 2) - 1) . " : " . number_format($data1['m2']) . " บาท"; ?> </li>
+                                                                                        <li class="list-group-item"> ธ.ค.<?php echo (substr($data1['periodid'], 2) - 1) . " : " . number_format($data1['m3']) . " บาท"; ?> </li>
+                                                                                        <li class="list-group-item"> ม.ค.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m4']) . " บาท"; ?> </li>
+                                                                                        <li class="list-group-item"> ก.พ.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m5']) . " บาท"; ?> </li>
+                                                                                        <li class="list-group-item"> มี.ค.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m6']) . " บาท"; ?> </li>
+                                                                                        <li class="list-group-item"> เม.ย.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m7']) . " บาท"; ?> </li>
+                                                                                        <li class="list-group-item"> พ.ค.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m8']) . " บาท"; ?> </li>
+                                                                                        <li class="list-group-item"> มิ.ย.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m9']) . " บาท"; ?> </li>
+                                                                                        <li class="list-group-item"> ก.ค.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m10']) . " บาท"; ?> </li>
+                                                                                        <li class="list-group-item"> ส.ค.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m11']) . " บาท"; ?> </li>
+                                                                                        <li class="list-group-item"> ก.ย.<?php echo (substr($data1['periodid'], 2)) . " : " . number_format($data1['m12']) . " บาท"; ?> </li>
+                                                                                    </ol>
                                                                                 </div>
 
+
+
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="btn-group" role="group">
+                                                                                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                        option
+                                                                                    </button>
+                                                                                    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                                                        <li><a class="dropdown-item" href="#" onclick="_deleteProject(<?php echo $data1['projectid'] ?>)"> <span class="icon-delete"></span> ลบ</a></li>
+                                                                                    </ul>
+                                                                                </div>
                                                                             </td>
 
                                                                         </tr>
@@ -234,6 +273,64 @@ include "./config/database.php";
     </div>
     <!-- Page wrapper end -->
     <?php include "./include/script.php"; ?>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script type="text/javascript">
+        function _deleteProject(projectid) {
+            Swal.fire({
+                title: 'ยืนยันการทำรายการ?',
+                text: "คุณต้องการที่จะลบข้อมูล!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "script-deleteproject-ajax.php",
+                        data: {
+                            projectid
+                        },
+                        success: function(msg) {
+                            if (msg === 'ok') {
+                                Swal.fire({
+
+                                    icon: 'success',
+                                    title: 'ลบข้อมูลสำเร็จแล้ว',
+                                    showConfirmButton: false,
+                                    timer: 2500
+                                })
+                                _setInterval();
+
+
+
+                            } else {
+                                Swal.fire({
+
+                                    icon: 'error',
+                                    title: 'เกิดข้อผิดพลาดในการลบข้อมูล ' + msg,
+                                    showConfirmButton: false,
+                                    timer: 2500
+                                })
+                            }
+
+                        }
+
+                    })
+
+                }
+            })
+        }
+
+        function _setInterval() {
+            setInterval(function() {
+                location.reload();
+            }, 3000);
+        }
+    </script>
 
 
 </body>
