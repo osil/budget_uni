@@ -80,9 +80,11 @@ $default = $result->fetch();
                     <option value="">เลือกแผนยุทธศาสตร์</option>
                     <?php
 
-                    $sql = "SELECT * FROM tb_phase";
+                    $sql = "SELECT * FROM tb_phase where cur_status = :cur_status";
 
-                    $params = array();
+                    $params = array(
+                        'cur_status' => '1'
+                    );
                     $result = $con->prepare($sql);
                     $res = $result->execute($params);
                     $row = $result->rowCount();
@@ -220,7 +222,7 @@ $default = $result->fetch();
 
         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
             <div class="field-wrapper">
-                <select class="select-multiple js-states" title="Select Product Category" multiple="multiple" id="indicator_id" name="indicator_id[]" required>
+                <select class="select-multiple js-states" title="Select Product Category" multiple="multiple" id="indicator_id" name="indicator_id[]">
                     <option>เลือกตัวชี้วัด</option>
                     <?php
 
@@ -269,11 +271,10 @@ $default = $result->fetch();
 
             <input type="hidden" name="projectid" id="projectid" value="<?php echo $default['projectid'] ?>" />
             <input type="hidden" name="periodid" id="periodid" value="<?php echo $default['periodid'] ?>" />
-            <input type="hidden" name="departmentid" id="departmentid" value="<?php echo $default['departmentid'] ?>" />
             <!-- Field wrapper start -->
             <div class="field-wrapper">
                 <select class="select-single js-states form-select required" data-live-search="true" id="budgetgroup_id" name="budgetgroup_id" onchange="_budgetgroup()" required>
-                    <option value="">เลือกประเภทงบประมาณ</option>
+                    <option value="">เลือกประเภทแหล่งเงิน</option>
                     <?php
 
                     $sql = "SELECT * FROM v_budgetegroup";
@@ -291,7 +292,7 @@ $default = $result->fetch();
                                                                                 ?>><?php echo $data['budgetgroup_code'] . " " . $data['budgetgroup_name'] ?></option>
                     <?php } ?>
                 </select>
-                <div class="field-placeholder">ประเภทงบประมาณ</div>
+                <div class="field-placeholder">เลือกประเภทแหล่งเงิน</div>
                 <div class="invalid-feedback">
                     * กรุณาเลือก
                 </div>
@@ -307,9 +308,11 @@ $default = $result->fetch();
                     <option value="">เลือกประเภทแผน</option>
                     <?php
 
-                    $sql = "SELECT * FROM plan";
+                    $sql = "SELECT * FROM plan where STATUS = :plan_status";
 
-                    $params = array();
+                    $params = array(
+                        'plan_status' => '1',
+                    );
                     $result = $con->prepare($sql);
                     $res = $result->execute($params);
                     $row = $result->rowCount();
@@ -336,7 +339,7 @@ $default = $result->fetch();
             <div class="field-wrapper">
 
                 <select class="select-single js-states required" data-live-search="true" id="productid" name="productid" required>
-                    <option value="">เลือกประเภทโครงการ</option>
+                    <option value="">เลือกประเภทผลผลิต</option>
 
                     <?php
 
@@ -365,7 +368,7 @@ $default = $result->fetch();
 
 
                 </select>
-                <div class="field-placeholder">เลือกประเภทโครงการ</div>
+                <div class="field-placeholder">เลือกประเภทผลผลิต</div>
                 <div class="invalid-feedback">
                     * กรุณาเลือก
                 </div>
@@ -379,26 +382,27 @@ $default = $result->fetch();
 
             <!-- Field wrapper start -->
             <div class="field-wrapper">
-                <select class="select-single js-states form-select required" data-live-search="true" id="strategyuid" name="strategyuid" onchange="_strategyu()" required>
-                    <option value="">เลือกประเภทยุทธศาสตร์</option>
+                <select class="select-single js-states form-select required" data-live-search="true" id="departmentid" name="departmentid" required>
+                    <option value="">เลือกสาขา</option>
                     <?php
 
-                    $sql = "SELECT * FROM strategyu";
+                    $sql = "SELECT * FROM v_department where master_id = :master_id";
 
-                    $params = array();
+                    $params = array(
+                        'master_id' => $_SESSION["sess-bgu-departmentid"]
+                    );
                     $result = $con->prepare($sql);
                     $res = $result->execute($params);
                     $row = $result->rowCount();
                     while ($data = $result->fetch()) {
                     ?>
-                        <option value="<?php echo $data['STRATEGYUID'] ?>" <?php
-                                                                            if ($data['STRATEGYUID'] == $default['strategyuid']) {
+                        <option value="<?php echo $data['departmentid'] ?>" <?php
+                                                                            if ($data['departmentid'] == $default['departmentid']) {
                                                                                 echo "selected";
-                                                                            }
-                                                                            ?>><?php echo $data['STRATEGYUNAME']  ?></option>
+                                                                            } ?>><?php echo $data['departmentname'] ?></option>
                     <?php } ?>
                 </select>
-                <div class="field-placeholder">เลือกประเภทยุทธศาสตร์</div>
+                <div class="field-placeholder">เลือกสาขา</div>
                 <div class="invalid-feedback">
                     * กรุณาเลือก
                 </div>
@@ -504,14 +508,17 @@ $default = $result->fetch();
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-12">
             <div class="form-section-header">รายละเอียดการใช้เงินแต่ละเดือน ประจำปีงบประมาณ <?php echo $periodid; ?></div>
         </div>
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+        <div class="field-wrapper">
+            <div class="field-placeholder"><u>ไตรมาสที่ 1</u></div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 
             <!-- Field wrapper start -->
             <div class="field-wrapper">
                 <div class="input-group">
-                    <input class="form-control" type="number" min="0" id="m1" name="m1" value="<?php echo $default['m1'] ?>" required>
+                    <input class="form-control" type="number" min="0" id="m1" name="m1" value="<?php echo $default['m1'] ?>" onfocus="Init(this)" onblur="Reset(this)" onchange="Compute('m1')" required>
                     <span class="input-group-text">
-                        <i class="icon-dollar-sign"></i>
+                        ฿
                     </span>
                 </div>
                 <div class="field-placeholder">ต.ค.<?php echo (substr($periodid, 2) - 1); ?></div>
@@ -519,14 +526,14 @@ $default = $result->fetch();
             <!-- Field wrapper end -->
 
         </div>
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 
             <!-- Field wrapper start -->
             <div class="field-wrapper">
                 <div class="input-group">
-                    <input class="form-control" type="number" min="0" id="m2" name="m2" value="<?php echo $default['m2'] ?>" required>
+                    <input class="form-control" type="number" min="0" id="m2" name="m2" value="<?php echo $default['m2'] ?>" onfocus="Init(this)" onblur="Reset(this)" onchange="Compute('m1')" required>
                     <span class="input-group-text">
-                        <i class="icon-dollar-sign"></i>
+                        ฿
                     </span>
                 </div>
                 <div class="field-placeholder">พ.ย.<?php echo (substr($periodid, 2) - 1); ?></div>
@@ -534,14 +541,14 @@ $default = $result->fetch();
             <!-- Field wrapper end -->
 
         </div>
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 
             <!-- Field wrapper start -->
             <div class="field-wrapper">
                 <div class="input-group">
-                    <input class="form-control" type="number" min="0" id="m3" name="m3" value="<?php echo $default['m3'] ?>" required>
+                    <input class="form-control" type="number" min="0" id="m3" name="m3" value="<?php echo $default['m3'] ?>" onfocus="Init(this)" onblur="Reset(this)" onchange="Compute('m1')" required>
                     <span class="input-group-text">
-                        <i class="icon-dollar-sign"></i>
+                        ฿
                     </span>
                 </div>
                 <div class="field-placeholder">ธ.ค.<?php echo (substr($periodid, 2) - 1); ?></div>
@@ -549,15 +556,18 @@ $default = $result->fetch();
             <!-- Field wrapper end -->
 
         </div>
+        <div class="field-wrapper">
+            <div class="field-placeholder"><u>ไตรมาสที่ 2</u></div>
+        </div>
 
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 
             <!-- Field wrapper start -->
             <div class="field-wrapper">
                 <div class="input-group">
-                    <input class="form-control" type="number" min="0" id="m4" name="m4" value="<?php echo $default['m4'] ?>" required>
+                    <input class="form-control" type="number" min="0" id="m4" name="m4" value="<?php echo $default['m4'] ?>" onfocus="Init(this)" onblur="Reset(this)" onchange="Compute('m1')" required>
                     <span class="input-group-text">
-                        <i class="icon-dollar-sign"></i>
+                        ฿
                     </span>
                 </div>
                 <div class="field-placeholder">ม.ค.<?php echo substr($periodid, 2); ?></div>
@@ -566,14 +576,14 @@ $default = $result->fetch();
 
         </div>
 
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 
             <!-- Field wrapper start -->
             <div class="field-wrapper">
                 <div class="input-group">
-                    <input class="form-control" type="number" min="0" id="m5" name="m5" value="<?php echo $default['m5'] ?>" required>
+                    <input class="form-control" type="number" min="0" id="m5" name="m5" value="<?php echo $default['m5'] ?>" onfocus="Init(this)" onblur="Reset(this)" onchange="Compute('m1')" required>
                     <span class="input-group-text">
-                        <i class="icon-dollar-sign"></i>
+                        ฿
                     </span>
                 </div>
                 <div class="field-placeholder">ก.พ.<?php echo substr($periodid, 2); ?></div>
@@ -581,14 +591,14 @@ $default = $result->fetch();
             <!-- Field wrapper end -->
 
         </div>
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 
             <!-- Field wrapper start -->
             <div class="field-wrapper">
                 <div class="input-group">
-                    <input class="form-control" type="number" min="0" id="m6" name="m6" value="<?php echo $default['m6'] ?>" required>
+                    <input class="form-control" type="number" min="0" id="m6" name="m6" value="<?php echo $default['m6'] ?>" onfocus="Init(this)" onblur="Reset(this)" onchange="Compute('m1')" required>
                     <span class="input-group-text">
-                        <i class="icon-dollar-sign"></i>
+                        ฿
                     </span>
                 </div>
                 <div class="field-placeholder">มี.ค.<?php echo substr($periodid, 2); ?></div>
@@ -596,14 +606,17 @@ $default = $result->fetch();
             <!-- Field wrapper end -->
 
         </div>
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+        <div class="field-wrapper">
+            <div class="field-placeholder"><u>ไตรมาสที่ 3</u></div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 
             <!-- Field wrapper start -->
             <div class="field-wrapper">
                 <div class="input-group">
-                    <input class="form-control" type="number" min="0" id="m7" name="m7" value="<?php echo $default['m7'] ?>" required>
+                    <input class="form-control" type="number" min="0" id="m7" name="m7" value="<?php echo $default['m7'] ?>" onfocus="Init(this)" onblur="Reset(this)" onchange="Compute('m1')" required>
                     <span class="input-group-text">
-                        <i class="icon-dollar-sign"></i>
+                        ฿
                     </span>
                 </div>
                 <div class="field-placeholder">เม.ย.<?php echo substr($periodid, 2); ?></div>
@@ -611,14 +624,14 @@ $default = $result->fetch();
             <!-- Field wrapper end -->
 
         </div>
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 
             <!-- Field wrapper start -->
             <div class="field-wrapper">
                 <div class="input-group">
-                    <input class="form-control" type="number" min="0" id="m8" name="m8" value="<?php echo $default['m8'] ?>" required>
+                    <input class="form-control" type="number" min="0" id="m8" name="m8" value="<?php echo $default['m8'] ?>" onfocus="Init(this)" onblur="Reset(this)" onchange="Compute('m1')" required>
                     <span class="input-group-text">
-                        <i class="icon-dollar-sign"></i>
+                        ฿
                     </span>
                 </div>
                 <div class="field-placeholder">พ.ค.<?php echo substr($periodid, 2); ?></div>
@@ -626,14 +639,14 @@ $default = $result->fetch();
             <!-- Field wrapper end -->
 
         </div>
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 
             <!-- Field wrapper start -->
             <div class="field-wrapper">
                 <div class="input-group">
-                    <input class="form-control" type="number" min="0" id="m9" name="m9" value="<?php echo $default['m9'] ?>" required>
+                    <input class="form-control" type="number" min="0" id="m9" name="m9" value="<?php echo $default['m9'] ?>" onfocus="Init(this)" onblur="Reset(this)" onchange="Compute('m1')" required>
                     <span class="input-group-text">
-                        <i class="icon-dollar-sign"></i>
+                        ฿
                     </span>
                 </div>
                 <div class="field-placeholder">มิ.ย.<?php echo substr($periodid, 2); ?></div>
@@ -641,14 +654,17 @@ $default = $result->fetch();
             <!-- Field wrapper end -->
 
         </div>
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+        <div class="field-wrapper">
+            <div class="field-placeholder"><u>ไตรมาสที่ 4</u></div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 
             <!-- Field wrapper start -->
             <div class="field-wrapper">
                 <div class="input-group">
-                    <input class="form-control" type="number" min="0" id="m10" name="m10" value="<?php echo $default['m10'] ?>" required>
+                    <input class="form-control" type="number" min="0" id="m10" name="m10" value="<?php echo $default['m10'] ?>" onfocus="Init(this)" onblur="Reset(this)" onchange="Compute('m1')" required>
                     <span class="input-group-text">
-                        <i class="icon-dollar-sign"></i>
+                        ฿
                     </span>
                 </div>
                 <div class="field-placeholder">ก.ค.<?php echo substr($periodid, 2); ?></div>
@@ -656,14 +672,14 @@ $default = $result->fetch();
             <!-- Field wrapper end -->
 
         </div>
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 
             <!-- Field wrapper start -->
             <div class="field-wrapper">
                 <div class="input-group">
-                    <input class="form-control" type="number" min="0" id="m11" name="m11" value="<?php echo $default['m11'] ?>" required>
+                    <input class="form-control" type="number" min="0" id="m11" name="m11" value="<?php echo $default['m11'] ?>" onfocus="Init(this)" onblur="Reset(this)" onchange="Compute('m1')" required>
                     <span class="input-group-text">
-                        <i class="icon-dollar-sign"></i>
+                        ฿
                     </span>
                 </div>
                 <div class="field-placeholder">ส.ค.<?php echo substr($periodid, 2); ?></div>
@@ -671,20 +687,25 @@ $default = $result->fetch();
             <!-- Field wrapper end -->
 
         </div>
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
 
             <!-- Field wrapper start -->
             <div class="field-wrapper">
                 <div class="input-group">
-                    <input class="form-control" type="number" min="0" id="m12" name="m12" value="<?php echo $default['m12'] ?>" required>
+                    <input class="form-control" type="number" min="0" id="m12" name="m12" value="<?php echo $default['m12'] ?>" onfocus="Init(this)" onblur="Reset(this)" onchange="Compute('m1')" required>
                     <span class="input-group-text">
-                        <i class="icon-dollar-sign"></i>
+                        ฿
                     </span>
                 </div>
                 <div class="field-placeholder">ก.ย.<?php echo substr($periodid, 2); ?></div>
             </div>
             <!-- Field wrapper end -->
 
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="form-section-header" style="font-size:2em;text-align:right;">
+                ยอดรวม <span id="totalSPAN"><?php echo number_format($default['m1'] + $default['m2'] + $default['m3'] + $default['m4'] + $default['m5'] + $default['m6'] + $default['m7'] + $default['m8'] + $default['m9'] + $default['m10'] + $default['m11'] + $default['m12']) ?></span> บาท
+            </div>
         </div>
 
 

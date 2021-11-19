@@ -11,7 +11,7 @@ try {
   $budgetgroup_id = $_POST['budgetgroup_id'];
   $planid = $_POST['planid'];
   $productid = $_POST['productid'];
-  $strategyuid = $_POST['strategyuid'];
+  $strategyuid = $_POST['strategy_id'];
   $budgettype_id = $_POST['budgettype_id'];
   $budgettype_sub_id = $_POST['budgettype_sub_id'];
   $departmentid = $_POST['departmentid'];
@@ -153,5 +153,5 @@ VALUES
 <meta charset="utf-8" />
 <script>
   alert("แก้ไขข้อมูลเรียบร้อยแล้ว");
-  window.location = 'project_add.php';
+  window.location = 'index.php';
 </script>

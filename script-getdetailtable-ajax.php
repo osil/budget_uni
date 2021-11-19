@@ -6,10 +6,10 @@ include "./config/database.php";
 
 
 $budgetgroup_id = $_POST['budgetgroup_id'];
-$planid = $_POST['planid'];
-$productid = $_POST['productid'];
-$strategyuid = $_POST['strategyuid'];
-$budgettype_id = $_POST['budgettype_id'];
+// $planid = $_POST['planid'];
+// $productid = $_POST['productid'];
+// $strategyuid = $_POST['strategyuid'];
+// $budgettype_id = $_POST['budgettype_id'];
 $departmentid = $_POST['departmentid'];
 $periodid = $_POST['periodid'];
 
@@ -42,22 +42,15 @@ INNER JOIN
 	budgettype_sub AS b
 	ON 
 		s.budgettype_sub_id = b.budgettype_sub_id
+INNER JOIN v_department AS v ON v.departmentid = s.departmentid
 WHERE
 s.budgetgroup_id = :budgetgroup_id
-AND s.planid = :planid
-AND s.productid = :productid
-AND s.strategyuid = :strategyuid
-AND s.budgettype_id = :budgettype_id
-AND s.departmentid = :departmentid
+AND v.master_id = :departmentid
 AND s.periodid = :periodid
 ";
 
 $params = array(
     'budgetgroup_id' => $budgetgroup_id,
-    'planid' => $planid,
-    'productid' => $productid,
-    'strategyuid' => $strategyuid,
-    'budgettype_id' => $budgettype_id,
     'departmentid' => $departmentid,
     'periodid' => $periodid
 );

@@ -28,7 +28,7 @@ $row = $result->rowCount();
 
 
 
-<option value="">เลือกประเภทโครงการ</option>
+<option value="">เลือกประเภทผลผลิต</option>
 <?php while ($data = $result->fetch()) {
 ?>
     <option value="<?php echo $data['PRODUCTID'] ?>"><?php echo $data['PRODUCTNAME'] ?></option>
